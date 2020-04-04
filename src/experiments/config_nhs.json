@@ -1,0 +1,60 @@
+{
+  "debug": 0,
+  "seed": 0,
+
+  "data": {
+    "type": "nhs",
+    "protected": "race",
+    "path": "../data/datasets/",
+    "whiten": ["O", "M", "J"],
+    "samples": null
+  },
+
+  "cf_fair": {
+    "model": "ridge",
+    "cv": 5,
+    "n_jobs": 1,
+    "poly_degrees": [1, 2, 3],
+    "intercept": true,
+    "alphas": [-3, 3, 8]
+  },
+
+  "max_cfu": {
+    "loss": "mse",
+    "type": "optimize",
+    "stddev_optim": "powell",
+    "optimize" : {
+      "epochs": 1,
+      "batchsize": 4096,
+      "optimizer": "sgd",
+      "lr": 100.0,
+      "scale_lr_by_pmax": false,
+      "lr_step_size": 1000,
+      "lr_gamma": 0.5,
+      "lr_minimum": 0.0001,
+      "lr_maximum": 100.0,
+      "momentum": 0.9,
+      "nesterov": true,
+      "curriculum": true
+    },
+    "grid": {
+      "type": "full_grid",
+      "p_steps": 26,
+      "pmax_vals": null
+    },
+    "use_grid": false
+  },
+
+  "results": {
+    "name": null,
+    "result_dir": "../data/results/"
+  },
+
+  "graph": {
+    "A": [],
+    "O": ["A"],
+    "M": ["A", "O"],
+    "J": ["A", "O", "M"],
+    "Y": ["A", "M", "J", "O"]
+  }
+}
